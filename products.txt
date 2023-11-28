@@ -1,22 +1,38 @@
-store1, butter, 1lb butter, 10, 2.59
-store1, cheese, laughing cow cheese 8oz block, 20, 1.74
-store1, cream cheese, 8oz box, 30, 0.80
-store1, eggs, 1 dozen, 100, 0.79
-store1, sour cream, 16oz box, 15, 0.99
-store1, milk, 1 gallon, 55, 1.78
-store1, almond milk, 64 ounce, 50, 2.29
-store1, carrots, aldi brand 2 lbs, 75, 0.99
-store1, romaine, 3 heads - aldi, 101, 1.99
-store1, cauliflower, organic, 55, 1.78
-store1, broccoli crowns, aldi brand, 51, 1.49
-store1, sweet potatoes, 3lb bag, 101, 2.49
-store1, onion, 3 lb bag aldi brand, 55, 1.79
-store1, apples, gala 3lb bag, 71, 2.99
-store1, banana, per pound price, 75, 0.38
-store1, sugar, 4lb bag, 71, 1.37
-store2, wheat flour, 10lb bag, 75, 10.99
-store2, rice, 10lb bag, 75, 12.99
-store2, olive oil, 16.9oz, 100, 2.99
-store2, honey, 80oz bottle, 100, 12.48
-store2, oats, 42oz box, 101, 2.39
-store2, coconut oil, 30 oz, 101, 4.99
+Sam's club, Butter, 1lb Butter, 10, 2.59
+Sam's club, Cheese, Laughing cow cheese 8oz block, 20, 1.74
+Sam's club, Cream Cheese, 8oz box, 30, 0.80
+Sam's club, Eggs, 1 dozen, 100, 0.79
+Sam's club, Sour cream, 16oz box, 15, 0.99
+Sam's club, Milk, 1 gallon, 55, 1.78
+Sam's club, Almond milk, 64 ounce, 50, 2.29
+Sam's club, Carrots, Aldi brand 2 lbs, 75, 0.99
+Sam's club, Romaine, 3 heads - aldi, 101, 1.99
+Sam's club, Cauliflower, organic, 55, 1.78
+Sam's club, Broccoli Crowns, aldi brand, 51, 1.49
+Sam's club, Sweet Potatoes, 3lb bag, 101, 2.49
+Sam's club, Onion, 3 lb Bag aldi brand, 55, 1.79
+Sam's club, Apples, Gala 3lb bag, 71, 2.99
+Sam's club, Banana, per pound price, 75, 0.38
+Sam's club, Sugar, 4lb bag, 71, 1.37
+Sam's club, Wheat Flour, 10lb bag, 75, 10.99
+Sam's club, Rice, 10lb bag, 75, 12.99
+Sam's club, Olive Oil, 16.9oz, 100, 2.99
+Sam's club, Honey, 80oz bottle, 100, 12.48
+Sam's club, Oats, 42oz box, 101, 2.39
+Sam's club, Coconut Oil, 30 oz, 101, 4.99
+Walmart, Milk, Great Value whole Vitamin D Milk - one gallon, 25, 3.57
+Walmart, Egg, Great Value Cage-Free Large Grade AA White Eggs 18 count, 75, 4.40
+Walmart, Broccoli Florets, Great Value Froze Broccoli Florets - Steamable Bag, 125, 1.16
+Walmart, Bounty Tissue, 6 Double Rolls for cleaning, 100, 21.95
+Walmart, Hot Dog Buns, Great Value Hot Dog Buns - White 11oz 8 count, 55, 1.46
+Walmart, Classic Iceberg Salad, Marketside Classic Iceberg Salad 12oz Bag, 101, 1.88
+Walmart, Mayonnaise, Best Foods Mayonnaise Real Mayo Gluten Free Sandwich Spread, 76, 5.48
+Walmart, Apple Juice, Great Value 100% Apple Juice, 105, 2.98
+Walmart, Tortilla Chips, Tostitos Cantina Tortilla Chips Thin & Crips 10oz, 102, 4.48
+Walmart, Cotton Swabs, Q Tips Original Cotton Swabs 500 count, 67, 3.86
+Walmart, Drinking water, Great value Purified Drinking water 16.9oz bottles 40 count, 76, 5.63
+Walmart, Paper, Norcom Filler Paper wide ruled 8x10.5, 100, 14.74
+Walmart, Glue sticks, Elmer's Disappearing purple washable school glue sticks - 2 count, 110, 1.37
+Walmart, Wipes, Equate Fresh Scent Flusable Wipes - 5 resealable packs, 100, 6.98
+Walmart, Toiler Paper, Angel Soft Toiler Paper 12 mega rolls, 95, 8.86
+Walmart, Paper plates, Great Value Everyday Strong Soak proof, 56, 6.22

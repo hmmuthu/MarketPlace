@@ -5,190 +5,282 @@
         {
           "products": [
             {
-              "name": "butter",
-              "description": "1lb butter",
-              "quantity": 6,
+              "name": "Butter",
+              "description": "1lb Butter",
+              "quantity": 10,
               "price": 2.59,
+              "id": 1
+            },
+            {
+              "name": "Cheese",
+              "description": "Laughing cow cheese 8oz block",
+              "quantity": 20,
+              "price": 1.74,
+              "id": 2
+            },
+            {
+              "name": "Cream Cheese",
+              "description": "8oz box cheese cream",
+              "quantity": 30,
+              "price": 0.8,
+              "id": 3
+            },
+            {
+              "name": "Eggs",
+              "description": "1 dozen egg",
+              "quantity": 100,
+              "price": 0.79,
               "id": 4
             },
             {
-              "name": "cheese",
-              "description": "laughing cow cheese 8oz block",
-              "quantity": 20,
-              "price": 1.74,
+              "name": "Sour cream",
+              "description": "16oz box sour cream",
+              "quantity": 15,
+              "price": 0.99,
               "id": 5
             },
             {
-              "name": "cream cheese",
-              "description": "8oz box",
-              "quantity": 30,
-              "price": 0.8,
+              "name": "Milk",
+              "description": "1 gallon milk box",
+              "quantity": 55,
+              "price": 1.78,
               "id": 6
             },
             {
-              "name": "eggs",
-              "description": "1 dozen",
-              "quantity": 100,
-              "price": 0.79,
+              "name": "Almond milk",
+              "description": "64 ounce almond milk",
+              "quantity": 50,
+              "price": 2.29,
               "id": 7
             },
             {
-              "name": "sour cream",
-              "description": "16oz box",
-              "quantity": 15,
+              "name": "Carrots",
+              "description": "Aldi brand 2 lbs carrot organic",
+              "quantity": 75,
               "price": 0.99,
               "id": 8
             },
             {
-              "name": "milk",
-              "description": "1 gallon",
-              "quantity": 53,
-              "price": 1.78,
+              "name": "Romaine",
+              "description": "3 heads - aldi romaine - good for salad",
+              "quantity": 101,
+              "price": 1.99,
               "id": 9
             },
             {
-              "name": "almond milk",
-              "description": "64 ounce",
-              "quantity": 50,
-              "price": 2.29,
+              "name": "Cauliflower",
+              "description": "organic cauliflower",
+              "quantity": 55,
+              "price": 1.78,
               "id": 10
             },
             {
-              "name": "carrots",
-              "description": "aldi brand 2 lbs",
-              "quantity": 75,
-              "price": 0.99,
+              "name": "Broccoli Crowns",
+              "description": "aldi brand broccoli",
+              "quantity": 51,
+              "price": 1.49,
               "id": 11
             },
             {
-              "name": "romaine",
-              "description": "3 heads - aldi",
-              "quantity": 96,
-              "price": 1.99,
+              "name": "Sweet Potatoes",
+              "description": "3lb bag sweet potatoes",
+              "quantity": 101,
+              "price": 2.49,
               "id": 12
             },
             {
-              "name": "cauliflower",
-              "description": "organic",
+              "name": "Onion",
+              "description": "3 lb Bag aldi brand onion",
               "quantity": 55,
-              "price": 1.78,
+              "price": 1.79,
               "id": 13
             },
             {
-              "name": "broccoli crowns",
-              "description": "aldi brand",
-              "quantity": 50,
-              "price": 1.49,
+              "name": "Apples",
+              "description": "Gala 3lb bag organic apples new crop",
+              "quantity": 71,
+              "price": 2.99,
               "id": 14
             },
             {
-              "name": "sweet potatoes",
-              "description": "3lb bag",
-              "quantity": 101,
-              "price": 2.49,
+              "name": "Banana",
+              "description": "organic banana",
+              "quantity": 75,
+              "price": 0.38,
               "id": 15
             },
             {
-              "name": "onion",
-              "description": "3 lb bag aldi brand",
-              "quantity": 55,
-              "price": 1.79,
+              "name": "Sugar",
+              "description": "4lb bag sugar",
+              "quantity": 71,
+              "price": 1.37,
               "id": 16
             },
             {
-              "name": "apples",
-              "description": "gala 3lb bag",
-              "quantity": 71,
-              "price": 2.99,
+              "name": "Wheat Flour",
+              "description": "10lb bag wheat flour",
+              "quantity": 75,
+              "price": 10.99,
               "id": 17
             },
             {
-              "name": "banana",
-              "description": "per pound price",
+              "name": "Rice",
+              "description": "10lb rice bag",
               "quantity": 75,
-              "price": 0.38,
+              "price": 12.99,
               "id": 18
             },
             {
-              "name": "sugar",
-              "description": "4lb bag",
-              "quantity": 71,
-              "price": 1.37,
+              "name": "Olive Oil",
+              "description": "16.9oz oilve oil",
+              "quantity": 100,
+              "price": 2.99,
               "id": 19
-            }
-          ],
-          "sellerEmail": "s",
-          "name": "store1",
-          "id": 4
-        },
-        {
-          "products": [
+            },
             {
-              "name": "wheat flour",
-              "description": "10lb bag",
-              "quantity": 73,
-              "price": 10.99,
+              "name": "Honey",
+              "description": "80oz bottle local honey",
+              "quantity": 100,
+              "price": 12.48,
               "id": 20
             },
             {
-              "name": "rice",
-              "description": "10lb bag",
-              "quantity": 75,
-              "price": 12.99,
+              "name": "Oats",
+              "description": "42oz box ready to make oats steel cut",
+              "quantity": 101,
+              "price": 2.39,
               "id": 21
             },
             {
-              "name": "olive oil",
-              "description": "16.9oz",
-              "quantity": 100,
-              "price": 2.99,
+              "name": "Coconut Oil",
+              "description": "30 oz coconut oil",
+              "quantity": 101,
+              "price": 4.99,
               "id": 22
-            },
-            {
-              "name": "honey",
-              "description": "80oz bottle",
-              "quantity": 105,
-              "price": 12.48,
-              "id": 23
-            },
-            {
-              "name": "oats",
-              "description": "42oz box",
-              "quantity": 100,
-              "price": 2.39,
-              "id": 24
             }
           ],
           "sellerEmail": "s",
-          "name": "store2",
-          "id": 5
+          "name": "Sam\u0027s club",
+          "id": 1
         },
         {
           "products": [
             {
-              "name": "abc",
-              "description": "abcd",
-              "quantity": 3,
-              "price": 3.0,
+              "name": "Milk",
+              "description": "Great Value whole Vitamin D Milk - one gallon",
+              "quantity": 25,
+              "price": 3.57,
+              "id": 23
+            },
+            {
+              "name": "Egg",
+              "description": "Great Value Cage-Free Large Grade AA White Eggs 18 count",
+              "quantity": 75,
+              "price": 4.4,
+              "id": 24
+            },
+            {
+              "name": "Broccoli Florets",
+              "description": "Great Value Froze Broccoli Florets - Steamable Bag",
+              "quantity": 125,
+              "price": 1.16,
+              "id": 25
+            },
+            {
+              "name": "Bounty Tissue",
+              "description": "6 Double Rolls for cleaning",
+              "quantity": 100,
+              "price": 21.95,
               "id": 26
             },
             {
-              "name": "fa",
-              "description": "adfa",
-              "quantity": 33,
-              "price": 333.0,
-              "id": 26
+              "name": "Hot Dog Buns",
+              "description": "Great Value Hot Dog Buns - White 11oz 8 count",
+              "quantity": 55,
+              "price": 1.46,
+              "id": 27
+            },
+            {
+              "name": "Classic Iceberg Salad",
+              "description": "Marketside Classic Iceberg Salad 12oz Bag",
+              "quantity": 101,
+              "price": 1.88,
+              "id": 28
+            },
+            {
+              "name": "Mayonnaise",
+              "description": "Best Foods Mayonnaise Real Mayo Gluten Free Sandwich Spread",
+              "quantity": 76,
+              "price": 5.48,
+              "id": 29
+            },
+            {
+              "name": "Apple Juice",
+              "description": "Great Value 100% Apple Juice",
+              "quantity": 105,
+              "price": 2.98,
+              "id": 30
+            },
+            {
+              "name": "Tortilla Chips",
+              "description": "Tostitos Cantina Tortilla Chips Thin \u0026 Crips 10oz",
+              "quantity": 102,
+              "price": 4.48,
+              "id": 31
+            },
+            {
+              "name": "Cotton Swabs",
+              "description": "Q Tips Original Cotton Swabs 500 count",
+              "quantity": 67,
+              "price": 3.86,
+              "id": 32
+            },
+            {
+              "name": "Drinking water",
+              "description": "Great value Purified Drinking water 16.9oz bottles 40 count",
+              "quantity": 76,
+              "price": 5.63,
+              "id": 33
+            },
+            {
+              "name": "Paper",
+              "description": "Norcom Filler Paper wide ruled 8x10.5",
+              "quantity": 100,
+              "price": 14.74,
+              "id": 34
+            },
+            {
+              "name": "Glue sticks",
+              "description": "Elmer\u0027s Disappearing purple washable school glue sticks - 2 count",
+              "quantity": 110,
+              "price": 1.37,
+              "id": 35
+            },
+            {
+              "name": "Wipes",
+              "description": "Equate Fresh Scent Flusable Wipes - 5 resealable packs",
+              "quantity": 100,
+              "price": 6.98,
+              "id": 36
+            },
+            {
+              "name": "Toiler Paper",
+              "description": "Angel Soft Toiler Paper 12 mega rolls",
+              "quantity": 95,
+              "price": 8.86,
+              "id": 37
+            },
+            {
+              "name": "Paper plates",
+              "description": "Great Value Everyday Strong Soak proof",
+              "quantity": 56,
+              "price": 6.22,
+              "id": 38
             }
           ],
           "sellerEmail": "s",
-          "name": "store3",
-          "id": 6
-        },
-        {
-          "products": [],
-          "sellerEmail": "s",
-          "name": "store4",
-          "id": 11
+          "name": "Walmart",
+          "id": 2
         }
       ],
       "email": "s",
@@ -199,118 +291,10 @@
     {
       "cart": [],
       "orders": [],
-      "email": "g",
-      "password": "g"
-    },
-    {
-      "cart": [],
-      "orders": [],
-      "email": "ddd",
-      "password": "ddd"
-    },
-    {
-      "cart": [],
-      "orders": [],
-      "email": "dddd",
-      "password": "ddd"
-    },
-    {
-      "cart": [],
-      "orders": [],
-      "email": "ddd1",
-      "password": "ddd"
-    },
-    {
-      "cart": [],
-      "orders": [],
-      "email": "dddd1",
-      "password": "ddd"
-    },
-    {
-      "cart": [],
-      "orders": [
-        {
-          "product": {
-            "name": "butter",
-            "description": "1lb butter",
-            "quantity": 2,
-            "price": 2.59,
-            "id": 4
-          },
-          "sellerName": "s",
-          "storeName": "store1"
-        },
-        {
-          "product": {
-            "name": "butter",
-            "description": "1lb butter",
-            "quantity": 2,
-            "price": 2.59,
-            "id": 4
-          },
-          "sellerName": "s",
-          "storeName": "store1"
-        },
-        {
-          "product": {
-            "name": "broccoli crowns",
-            "description": "aldi brand",
-            "quantity": 1,
-            "price": 1.49,
-            "id": 14
-          },
-          "sellerName": "s",
-          "storeName": "store1"
-        },
-        {
-          "product": {
-            "name": "wheat flour",
-            "description": "10lb bag",
-            "quantity": 2,
-            "price": 10.99,
-            "id": 20
-          },
-          "sellerName": "s",
-          "storeName": "store2"
-        },
-        {
-          "product": {
-            "name": "milk",
-            "description": "1 gallon",
-            "quantity": 2,
-            "price": 1.78,
-            "id": 9
-          },
-          "sellerName": "s",
-          "storeName": "store1"
-        },
-        {
-          "product": {
-            "name": "romaine",
-            "description": "3 heads - aldi",
-            "quantity": 5,
-            "price": 1.99,
-            "id": 12
-          },
-          "sellerName": "s",
-          "storeName": "store1"
-        },
-        {
-          "product": {
-            "name": "oats",
-            "description": "42oz box",
-            "quantity": 1,
-            "price": 2.39,
-            "id": 24
-          },
-          "sellerName": "s",
-          "storeName": "store2"
-        }
-      ],
       "email": "c",
       "password": "c"
     }
   ],
-  "productCount": 26,
-  "storeCount": 12
+  "productCount": 39,
+  "storeCount": 3
 }
