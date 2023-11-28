@@ -1,0 +1,22 @@
+store1, butter, 1lb butter, 10, 2.59
+store1, cheese, laughing cow cheese 8oz block, 20, 1.74
+store1, cream cheese, 8oz box, 30, 0.80
+store1, eggs, 1 dozen, 100, 0.79
+store1, sour cream, 16oz box, 15, 0.99
+store1, milk, 1 gallon, 55, 1.78
+store1, almond milk, 64 ounce, 50, 2.29
+store1, carrots, aldi brand 2 lbs, 75, 0.99
+store1, romaine, 3 heads - aldi, 101, 1.99
+store1, cauliflower, organic, 55, 1.78
+store1, broccoli crowns, aldi brand, 51, 1.49
+store1, sweet potatoes, 3lb bag, 101, 2.49
+store1, onion, 3 lb bag aldi brand, 55, 1.79
+store1, apples, gala 3lb bag, 71, 2.99
+store1, banana, per pound price, 75, 0.38
+store1, sugar, 4lb bag, 71, 1.37
+store2, wheat flour, 10lb bag, 75, 10.99
+store2, rice, 10lb bag, 75, 12.99
+store2, olive oil, 16.9oz, 100, 2.99
+store2, honey, 80oz bottle, 100, 12.48
+store2, oats, 42oz box, 101, 2.39
+store2, coconut oil, 30 oz, 101, 4.99

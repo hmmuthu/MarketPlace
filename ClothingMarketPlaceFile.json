@@ -1,0 +1,316 @@
+{
+  "sellerList": [
+    {
+      "stores": [
+        {
+          "products": [
+            {
+              "name": "butter",
+              "description": "1lb butter",
+              "quantity": 6,
+              "price": 2.59,
+              "id": 4
+            },
+            {
+              "name": "cheese",
+              "description": "laughing cow cheese 8oz block",
+              "quantity": 20,
+              "price": 1.74,
+              "id": 5
+            },
+            {
+              "name": "cream cheese",
+              "description": "8oz box",
+              "quantity": 30,
+              "price": 0.8,
+              "id": 6
+            },
+            {
+              "name": "eggs",
+              "description": "1 dozen",
+              "quantity": 100,
+              "price": 0.79,
+              "id": 7
+            },
+            {
+              "name": "sour cream",
+              "description": "16oz box",
+              "quantity": 15,
+              "price": 0.99,
+              "id": 8
+            },
+            {
+              "name": "milk",
+              "description": "1 gallon",
+              "quantity": 53,
+              "price": 1.78,
+              "id": 9
+            },
+            {
+              "name": "almond milk",
+              "description": "64 ounce",
+              "quantity": 50,
+              "price": 2.29,
+              "id": 10
+            },
+            {
+              "name": "carrots",
+              "description": "aldi brand 2 lbs",
+              "quantity": 75,
+              "price": 0.99,
+              "id": 11
+            },
+            {
+              "name": "romaine",
+              "description": "3 heads - aldi",
+              "quantity": 96,
+              "price": 1.99,
+              "id": 12
+            },
+            {
+              "name": "cauliflower",
+              "description": "organic",
+              "quantity": 55,
+              "price": 1.78,
+              "id": 13
+            },
+            {
+              "name": "broccoli crowns",
+              "description": "aldi brand",
+              "quantity": 50,
+              "price": 1.49,
+              "id": 14
+            },
+            {
+              "name": "sweet potatoes",
+              "description": "3lb bag",
+              "quantity": 101,
+              "price": 2.49,
+              "id": 15
+            },
+            {
+              "name": "onion",
+              "description": "3 lb bag aldi brand",
+              "quantity": 55,
+              "price": 1.79,
+              "id": 16
+            },
+            {
+              "name": "apples",
+              "description": "gala 3lb bag",
+              "quantity": 71,
+              "price": 2.99,
+              "id": 17
+            },
+            {
+              "name": "banana",
+              "description": "per pound price",
+              "quantity": 75,
+              "price": 0.38,
+              "id": 18
+            },
+            {
+              "name": "sugar",
+              "description": "4lb bag",
+              "quantity": 71,
+              "price": 1.37,
+              "id": 19
+            }
+          ],
+          "sellerEmail": "s",
+          "name": "store1",
+          "id": 4
+        },
+        {
+          "products": [
+            {
+              "name": "wheat flour",
+              "description": "10lb bag",
+              "quantity": 73,
+              "price": 10.99,
+              "id": 20
+            },
+            {
+              "name": "rice",
+              "description": "10lb bag",
+              "quantity": 75,
+              "price": 12.99,
+              "id": 21
+            },
+            {
+              "name": "olive oil",
+              "description": "16.9oz",
+              "quantity": 100,
+              "price": 2.99,
+              "id": 22
+            },
+            {
+              "name": "honey",
+              "description": "80oz bottle",
+              "quantity": 105,
+              "price": 12.48,
+              "id": 23
+            },
+            {
+              "name": "oats",
+              "description": "42oz box",
+              "quantity": 100,
+              "price": 2.39,
+              "id": 24
+            }
+          ],
+          "sellerEmail": "s",
+          "name": "store2",
+          "id": 5
+        },
+        {
+          "products": [
+            {
+              "name": "abc",
+              "description": "abcd",
+              "quantity": 3,
+              "price": 3.0,
+              "id": 26
+            },
+            {
+              "name": "fa",
+              "description": "adfa",
+              "quantity": 33,
+              "price": 333.0,
+              "id": 26
+            }
+          ],
+          "sellerEmail": "s",
+          "name": "store3",
+          "id": 6
+        },
+        {
+          "products": [],
+          "sellerEmail": "s",
+          "name": "store4",
+          "id": 11
+        }
+      ],
+      "email": "s",
+      "password": "s"
+    }
+  ],
+  "customerList": [
+    {
+      "cart": [],
+      "orders": [],
+      "email": "g",
+      "password": "g"
+    },
+    {
+      "cart": [],
+      "orders": [],
+      "email": "ddd",
+      "password": "ddd"
+    },
+    {
+      "cart": [],
+      "orders": [],
+      "email": "dddd",
+      "password": "ddd"
+    },
+    {
+      "cart": [],
+      "orders": [],
+      "email": "ddd1",
+      "password": "ddd"
+    },
+    {
+      "cart": [],
+      "orders": [],
+      "email": "dddd1",
+      "password": "ddd"
+    },
+    {
+      "cart": [],
+      "orders": [
+        {
+          "product": {
+            "name": "butter",
+            "description": "1lb butter",
+            "quantity": 2,
+            "price": 2.59,
+            "id": 4
+          },
+          "sellerName": "s",
+          "storeName": "store1"
+        },
+        {
+          "product": {
+            "name": "butter",
+            "description": "1lb butter",
+            "quantity": 2,
+            "price": 2.59,
+            "id": 4
+          },
+          "sellerName": "s",
+          "storeName": "store1"
+        },
+        {
+          "product": {
+            "name": "broccoli crowns",
+            "description": "aldi brand",
+            "quantity": 1,
+            "price": 1.49,
+            "id": 14
+          },
+          "sellerName": "s",
+          "storeName": "store1"
+        },
+        {
+          "product": {
+            "name": "wheat flour",
+            "description": "10lb bag",
+            "quantity": 2,
+            "price": 10.99,
+            "id": 20
+          },
+          "sellerName": "s",
+          "storeName": "store2"
+        },
+        {
+          "product": {
+            "name": "milk",
+            "description": "1 gallon",
+            "quantity": 2,
+            "price": 1.78,
+            "id": 9
+          },
+          "sellerName": "s",
+          "storeName": "store1"
+        },
+        {
+          "product": {
+            "name": "romaine",
+            "description": "3 heads - aldi",
+            "quantity": 5,
+            "price": 1.99,
+            "id": 12
+          },
+          "sellerName": "s",
+          "storeName": "store1"
+        },
+        {
+          "product": {
+            "name": "oats",
+            "description": "42oz box",
+            "quantity": 1,
+            "price": 2.39,
+            "id": 24
+          },
+          "sellerName": "s",
+          "storeName": "store2"
+        }
+      ],
+      "email": "c",
+      "password": "c"
+    }
+  ],
+  "productCount": 26,
+  "storeCount": 12
+}
