@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -23,12 +24,13 @@ public class SellerProductForm extends JDialog {
 
     public SellerProductForm(JFrame parent, Store store, ClothingMarketPlace marketPlace) {
         super(parent);
-        marketPlace.initGui(this, "Products", sellerProductPanel,800, 500);
+        setupLayout();
+        marketPlace.initGui(this, "Products", sellerProductPanel, 800, 500);
         this.marketPlace = marketPlace;
         this.store = store;
         this.sellerItemTableModel = new SellerItemTableModel();
         ArrayList<ShoppingItem> storeItems = marketPlace.getShoppingItems(store);
-        for (ShoppingItem shoppingItem: storeItems) {
+        for (ShoppingItem shoppingItem : storeItems) {
             this.sellerItemTableModel.addElement(shoppingItem);
         }
         this.productsTable.setModel(this.sellerItemTableModel);
@@ -130,8 +132,7 @@ public class SellerProductForm extends JDialog {
                 "Price:", priceField,
         };
         int option = JOptionPane.showConfirmDialog(null, message, "New product", JOptionPane.OK_CANCEL_OPTION);
-        if (option == JOptionPane.OK_OPTION)
-        {
+        if (option == JOptionPane.OK_OPTION) {
             String name = nameField.getText();
             String description = descriptionField.getText();
             String quantity = quantityField.getText();
@@ -181,8 +182,7 @@ public class SellerProductForm extends JDialog {
                 "Price:", priceField,
         };
         int option = JOptionPane.showConfirmDialog(null, message, "Modify product", JOptionPane.OK_CANCEL_OPTION);
-        if (option == JOptionPane.OK_OPTION)
-        {
+        if (option == JOptionPane.OK_OPTION) {
             String name = nameField.getText();
             String description = descriptionField.getText();
             String quantity = quantityField.getText();
@@ -217,4 +217,49 @@ public class SellerProductForm extends JDialog {
         store.deleteProduct(shoppingItem.getProduct().getId());
         sellerItemTableModel.fireTableDataChanged();
     }
+
+    private void setupLayout() {
+        Font defaultFont = new Font("Arial Rounded MT Bold", Font.BOLD, 16);
+
+        sellerProductPanel = new JPanel();
+        sellerProductPanel.setLayout(new GridBagLayout());
+
+        final JPanel headerPanel = new JPanel();
+        sellerProductPanel.add(headerPanel);
+
+        final JLabel headerLabel= new JLabel();
+        headerLabel.setFont(defaultFont);
+        headerLabel.setText("Products");
+        headerPanel.add(headerLabel);
+
+        final JPanel tablePanel = new JPanel();
+        sellerProductPanel.add(tablePanel);
+        productsTable = new JTable();
+        final JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(productsTable);
+        tablePanel.add(scrollPane);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(11, 1));
+        sortByNameButton = new JButton("Sort by Name");
+        sortByPriceButton = new JButton("Sort by Price");
+        newProductButton = new JButton("New Product");
+        modifyProductButton = new JButton("Modify Product");
+        deleteProductButton = new JButton("Delete Product");
+
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(sortByNameButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(sortByPriceButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(newProductButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(modifyProductButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(deleteProductButton);
+        buttonPanel.add(new JPanel());
+
+        sellerProductPanel.add(buttonPanel);
+    }
+
 }

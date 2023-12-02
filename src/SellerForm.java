@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,12 +19,13 @@ public class SellerForm extends JDialog {
 
     public SellerForm(JFrame parent, Seller seller, ClothingMarketPlace marketPlace) {
         super(parent);
-        marketPlace.initGui(this, "Seller", sellerPanel,500, 500);
+        setupLayout();
+        marketPlace.initGui(this, "Seller", sellerPanel, 500, 500);
         this.storeTableModel = new StoreTableModel();
         this.marketPlace = marketPlace;
         this.seller = seller;
 
-        for (Store s: seller.getStores()) {
+        for (Store s : seller.getStores()) {
             this.storeTableModel.addElement(s);
         }
         this.storesTable.setModel(this.storeTableModel);
@@ -50,7 +52,7 @@ public class SellerForm extends JDialog {
         this.exportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               exportAction();
+                exportAction();
             }
         });
         this.newStoreButton.addActionListener(new ActionListener() {
@@ -149,7 +151,7 @@ public class SellerForm extends JDialog {
             return;
         }
         Store store = seller.createStore(storeName);
-        if (store == null){
+        if (store == null) {
             JOptionPane.showMessageDialog(sellerPanel,
                     "Store name already exists. Please try a different name",
                     "new store failed",
@@ -188,4 +190,54 @@ public class SellerForm extends JDialog {
         storeStats.pack();
         storeStats.setVisible(true);
     }
+    private void setupLayout() {
+        Font defaultFont = new Font("Arial Rounded MT Bold", Font.BOLD, 16);
+
+        sellerPanel = new JPanel();
+        sellerPanel.setLayout(new GridBagLayout());
+
+        final JPanel headerPanel = new JPanel();
+        sellerPanel.add(headerPanel);
+
+        final JLabel headerLabel= new JLabel();
+        headerLabel.setFont(defaultFont);
+        headerLabel.setText("Stores");
+        headerPanel.add(headerLabel);
+
+        final JPanel tablePanel = new JPanel();
+        sellerPanel.add(tablePanel);
+        storesTable = new JTable();
+        final JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(storesTable);
+        tablePanel.add(scrollPane);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(15, 1));
+        signOffButton = new JButton("Sign off");
+        passwordButton = new JButton("Password");
+        importButton = new JButton("Import");
+        exportButton = new JButton("Export");
+        newStoreButton = new JButton("New Store");
+        productsButton = new JButton("Products");
+        statsButton = new JButton("Stats");
+
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(signOffButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(passwordButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(importButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(exportButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(newStoreButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(productsButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(statsButton);
+        buttonPanel.add(new JPanel());
+
+        sellerPanel.add(buttonPanel);
+    }
+
 }

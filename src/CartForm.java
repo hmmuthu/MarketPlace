@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -8,30 +9,28 @@ public class CartForm extends JDialog {
     private JTable productsTable;
     private JButton removeProductButton;
     private JButton checkoutButton;
-    private JLabel total;
-
+    private JLabel totalLabel;
     private Customer customer;
-
     private CustomerItemTableModel customerItemTableModel;
-
     private ClothingMarketPlace marketPlace;
 
     public CartForm(JFrame parent, Customer customer, ClothingMarketPlace marketPlace) {
         super(parent);
-        marketPlace.initGui(this, "Cart", cartPanel,500, 500);
+        setupLayout();
+        marketPlace.initGui(this, "Cart", cartPanel, 500, 500);
         this.customerItemTableModel = new CustomerItemTableModel();
         this.customer = customer;
         this.marketPlace = marketPlace;
 
         ArrayList<ShoppingItem> storeItems = customer.getCart();
-        for (ShoppingItem shoppingItem: storeItems) {
+        for (ShoppingItem shoppingItem : storeItems) {
             this.customerItemTableModel.addElement(shoppingItem);
         }
         this.productsTable.setModel(this.customerItemTableModel);
         this.productsTable.getColumnModel().getColumn(0).setPreferredWidth(100);
         this.productsTable.getColumnModel().getColumn(1).setPreferredWidth(300);
 
-        this.total.setText('$' + String.format("%.2f", customer.getTotal()));
+        this.totalLabel.setText('$' + String.format("%.2f", customer.getTotal()));
         this.checkoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,7 +69,7 @@ public class CartForm extends JDialog {
         this.marketPlace = marketPlace;
     }
 
-    void checkoutAction() {
+    private void checkoutAction() {
         if (customer.getCart().size() == 0) {
             JOptionPane.showMessageDialog(cartPanel,
                     "No products to checkout",
@@ -87,11 +86,11 @@ public class CartForm extends JDialog {
         this.customerItemTableModel = new CustomerItemTableModel();
         productsTable.setModel(customerItemTableModel);
         customerItemTableModel.fireTableDataChanged();
-        this.total.setText("$0.00");
+        this.totalLabel.setText("$0.00");
         dispose();
     }
 
-    void removeProductAction() {
+    private void removeProductAction() {
         if (productsTable.getSelectedRowCount() != 1) {
             JOptionPane.showMessageDialog(cartPanel,
                     "one product need to be selected",
@@ -102,7 +101,40 @@ public class CartForm extends JDialog {
         ShoppingItem selectedItem = customerItemTableModel.getShoppingItems().get(productsTable.getSelectedRow());
         customerItemTableModel.removeElement(selectedItem);
         customer.removeFromCart(selectedItem, marketPlace.getShoppingItems());
-        total.setText('$' + String.format("%.2f", customer.getTotal()));
+        totalLabel.setText('$' + String.format("%.2f", customer.getTotal()));
         customerItemTableModel.fireTableDataChanged();
+    }
+
+    private void setupLayout() {
+        Font defaultFont = new Font("Arial Rounded MT Bold", Font.BOLD, 16);
+        cartPanel = new JPanel();
+        cartPanel.setLayout(new GridBagLayout());
+
+        final JPanel headerPanel = new JPanel();
+        cartPanel.add(headerPanel);
+
+        final JLabel headerLabel = new JLabel();
+        headerLabel.setFont(defaultFont);
+        headerLabel.setText("Cart");
+        headerPanel.add(headerLabel);
+
+        final JPanel tablePanel = new JPanel();
+        cartPanel.add(tablePanel);
+        productsTable = new JTable();
+        final JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(productsTable);
+        tablePanel.add(scrollPane);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(5, 1));
+        totalLabel = new JLabel();
+        removeProductButton = new JButton("Remove Product");
+        checkoutButton = new JButton("Checkout");
+        buttonPanel.add(totalLabel);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(removeProductButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(checkoutButton);
+        cartPanel.add(buttonPanel);
     }
 }

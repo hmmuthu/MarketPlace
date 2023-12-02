@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class StoreStatsForm extends JDialog {
@@ -14,14 +15,15 @@ public class StoreStatsForm extends JDialog {
 
     public StoreStatsForm(JFrame parent, Store store, ClothingMarketPlace marketPlace) {
         super(parent);
-        marketPlace.initGui(this, "Stats", storeStatsPanel,500, 500);
+        setupLayout();
+        marketPlace.initGui(this, "Stats", storeStatsPanel, 500, 500);
         this.sellerItemTableModel = new SellerItemTableModel();
         this.store = store;
         this.marketPlace = marketPlace;
         this.storeStatsHeader.setText(store.getName() + " Stats");
 
         ArrayList<ShoppingItem> storeItems = marketPlace.getSoldItems();
-        for (ShoppingItem shoppingItem: storeItems) {
+        for (ShoppingItem shoppingItem : storeItems) {
             this.sellerItemTableModel.addElement(shoppingItem);
         }
         this.productsTable.setModel(this.sellerItemTableModel);
@@ -52,4 +54,25 @@ public class StoreStatsForm extends JDialog {
     public void setMarketPlace(ClothingMarketPlace marketPlace) {
         this.marketPlace = marketPlace;
     }
+    private void setupLayout() {
+        Font defaultFont = new Font("Arial Rounded MT Bold", Font.BOLD, 16);
+
+        storeStatsPanel = new JPanel();
+        storeStatsPanel.setLayout(new GridBagLayout());
+
+        final JPanel headerPanel = new JPanel();
+        storeStatsPanel.add(headerPanel);
+
+        storeStatsHeader = new JLabel();
+        storeStatsHeader.setFont(defaultFont);
+        headerPanel.add(storeStatsHeader);
+
+        final JPanel tablePanel = new JPanel();
+        storeStatsPanel.add(tablePanel);
+        productsTable = new JTable();
+        final JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(productsTable);
+        tablePanel.add(scrollPane);
+    }
+
 }

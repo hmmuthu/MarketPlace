@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class CustomerForm extends JDialog {
     private JButton buyProductButton;
     private JButton signOffButton;
     private JButton passwordButton;
-    private JButton sortByName;
+    private JButton sortByNameButton;
     private JButton sortByPriceButton;
     private JButton orderButton;
     private JButton searchButton;
@@ -27,13 +28,14 @@ public class CustomerForm extends JDialog {
 
     public CustomerForm(JFrame parent, Customer customer, ClothingMarketPlace marketPlace) {
         super(parent);
-        marketPlace.initGui(this, "Customer", customerPanel,500, 500);
+        setupLayout();
+        marketPlace.initGui(this, "Customer", customerPanel, 500, 500);
         this.customerItemTableModel = new CustomerItemTableModel();
         this.customer = customer;
         this.marketPlace = marketPlace;
 
         ArrayList<ShoppingItem> storeItems = marketPlace.getShoppingItems();
-        for (ShoppingItem shoppingItem: storeItems) {
+        for (ShoppingItem shoppingItem : storeItems) {
             this.customerItemTableModel.addElement(shoppingItem);
         }
         this.productsTable.setModel(this.customerItemTableModel);
@@ -58,7 +60,7 @@ public class CustomerForm extends JDialog {
                 searchAction();
             }
         });
-        this.sortByName.addActionListener(new ActionListener() {
+        this.sortByNameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sortByNameAction();
@@ -136,7 +138,7 @@ public class CustomerForm extends JDialog {
         this.sortByPriceAscending = sortByPriceAscending;
     }
 
-    void changePasswordAction() {
+    private void changePasswordAction() {
         JPasswordField pf = new JPasswordField();
         int ok = JOptionPane.showConfirmDialog(null, pf, "Enter new password", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (ok == JOptionPane.OK_OPTION) {
@@ -144,7 +146,7 @@ public class CustomerForm extends JDialog {
         }
     }
 
-    void searchAction() {
+    private void searchAction() {
         JComboBox searchType = new JComboBox();
         searchType.addItem("Name");
         searchType.addItem("Description");
@@ -155,8 +157,7 @@ public class CustomerForm extends JDialog {
                 "Search:", searchField,
         };
         int option = JOptionPane.showConfirmDialog(null, message, "Search product", JOptionPane.OK_CANCEL_OPTION);
-        if (option == JOptionPane.OK_OPTION)
-        {
+        if (option == JOptionPane.OK_OPTION) {
             ArrayList<ShoppingItem> searchedItems = null;
             ArrayList<ShoppingItem> items = marketPlace.getShoppingItems();
             switch (searchType.getSelectedIndex()) {
@@ -170,7 +171,7 @@ public class CustomerForm extends JDialog {
             }
 
             this.customerItemTableModel = new CustomerItemTableModel();
-            for (ShoppingItem shoppingItem: searchedItems) {
+            for (ShoppingItem shoppingItem : searchedItems) {
                 customerItemTableModel.addElement(shoppingItem);
             }
             productsTable.setModel(customerItemTableModel);
@@ -179,19 +180,19 @@ public class CustomerForm extends JDialog {
 
     }
 
-    void sortByNameAction() {
+    private void sortByNameAction() {
         marketPlace.sortByName(customerItemTableModel.getShoppingItems(), sortByNameAscending);
         customerItemTableModel.fireTableDataChanged();
         sortByNameAscending = !sortByNameAscending;
     }
 
-    void sortByPriceAction() {
+    private void sortByPriceAction() {
         marketPlace.sortByPrice(customerItemTableModel.getShoppingItems(), sortByPriceAscending);
         customerItemTableModel.fireTableDataChanged();
         sortByPriceAscending = !sortByPriceAscending;
     }
 
-    void buyProductAction() {
+    private void buyProductAction() {
         if (productsTable.getSelectedRowCount() != 1) {
             JOptionPane.showMessageDialog(customerPanel,
                     "one product need to be selected",
@@ -217,9 +218,9 @@ public class CustomerForm extends JDialog {
             buyQuantity = Integer.parseInt(quanityString);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(customerPanel,
-                        "Quantity is invalid. Please try again",
-                        "Buy product failed",
-                        JOptionPane.ERROR_MESSAGE);
+                    "Quantity is invalid. Please try again",
+                    "Buy product failed",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (buyQuantity > selectedItem.getProduct().getQuantity()) {
@@ -250,7 +251,7 @@ public class CustomerForm extends JDialog {
         }
     }
 
-    void cartAction() {
+    private void cartAction() {
         CartForm cartForm = new CartForm(null, customer, marketPlace);
         cartForm.pack();
         cartForm.setVisible(true);
@@ -258,18 +259,73 @@ public class CustomerForm extends JDialog {
         customerItemTableModel.fireTableDataChanged();
     }
 
-    void listAction() {
+    private void listAction() {
         this.customerItemTableModel = new CustomerItemTableModel();
-        for (ShoppingItem shoppingItem: marketPlace.getShoppingItems()) {
+        for (ShoppingItem shoppingItem : marketPlace.getShoppingItems()) {
             customerItemTableModel.addElement(shoppingItem);
         }
         productsTable.setModel(customerItemTableModel);
         customerItemTableModel.fireTableDataChanged();
     }
 
-    void orderAction() {
+    private void orderAction() {
         OrderForm orderForm = new OrderForm(null, customer, marketPlace);
         orderForm.pack();
         orderForm.setVisible(true);
+    }
+
+    private void setupLayout() {
+        Font defaultFont = new Font("Arial Rounded MT Bold", Font.BOLD, 16);
+
+        customerPanel = new JPanel();
+        customerPanel.setLayout(new GridBagLayout());
+
+        final JPanel headerPanel = new JPanel();
+        customerPanel.add(headerPanel);
+
+        final JLabel headerLabel= new JLabel();
+        headerLabel.setFont(defaultFont);
+        headerPanel.add(headerLabel);
+
+        final JPanel tablePanel = new JPanel();
+        customerPanel.add(tablePanel);
+        productsTable = new JTable();
+        final JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(productsTable);
+        tablePanel.add(scrollPane);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(19, 1));
+        signOffButton = new JButton("Sign off");
+        passwordButton = new JButton("Password");
+        searchButton = new JButton("Search");
+        listAllButton = new JButton("List All");
+        orderButton = new JButton("Orders");
+        buyProductButton = new JButton("Buy Product");
+        sortByNameButton = new JButton("Sort By Name");
+        sortByPriceButton = new JButton("Sort By Price");
+        cartButton = new JButton("Cart");
+
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(signOffButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(passwordButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(searchButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(listAllButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(orderButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(buyProductButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(sortByNameButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(sortByPriceButton);
+        buttonPanel.add(new JPanel());
+        buttonPanel.add(cartButton);
+        buttonPanel.add(new JPanel());
+
+        customerPanel.add(buttonPanel);
     }
 }

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,13 +17,14 @@ public class OrderForm extends JDialog {
 
     public OrderForm(JFrame parent, Customer customer, ClothingMarketPlace marketPlace) {
         super(parent);
-        marketPlace.initGui(this, "Orders", orderPanel,500, 500);
+        setupLayout();
+        marketPlace.initGui(this, "Orders", orderPanel, 500, 500);
         this.customerItemTableModel = new CustomerItemTableModel();
         this.customer = customer;
         this.marketPlace = marketPlace;
 
         ArrayList<ShoppingItem> storeItems = customer.getOrders();
-        for (ShoppingItem shoppingItem: storeItems) {
+        for (ShoppingItem shoppingItem : storeItems) {
             this.customerItemTableModel.addElement(shoppingItem);
         }
         this.productsTable.setModel(customerItemTableModel);
@@ -60,7 +62,8 @@ public class OrderForm extends JDialog {
     public void setMarketPlace(ClothingMarketPlace marketPlace) {
         this.marketPlace = marketPlace;
     }
-    void exportAction() {
+
+    private void exportAction() {
         String fileName = JOptionPane.showInputDialog(null, "Enter file name to export", "export", JOptionPane.INFORMATION_MESSAGE);
         if (fileName == null) {
             return;
@@ -76,5 +79,34 @@ public class OrderForm extends JDialog {
                     "Export success",
                     JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    private void setupLayout() {
+        Font defaultFont = new Font("Arial Rounded MT Bold", Font.BOLD, 16);
+
+        orderPanel = new JPanel();
+        orderPanel.setLayout(new GridBagLayout());
+
+        final JPanel headerPanel = new JPanel();
+        orderPanel.add(headerPanel);
+
+        final JLabel headerLabel= new JLabel();
+        headerLabel.setFont(defaultFont);
+        headerLabel.setText("Orders");
+        headerPanel.add(headerLabel);
+
+        final JPanel tablePanel = new JPanel();
+        orderPanel.add(tablePanel);
+        productsTable = new JTable();
+        final JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(productsTable);
+        tablePanel.add(scrollPane);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(1, 1));
+        exportButton = new JButton("Export Purchase History");
+        buttonPanel.add(exportButton);
+
+        orderPanel.add(buttonPanel);
     }
 }
