@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.ClassNotFoundException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class MarketPlaceServer {
 
     public static void main(String args[]) throws IOException, ClassNotFoundException {
         MarketPlaceServer marketPlaceServer = new MarketPlaceServer();
+        String hostName = InetAddress.getLocalHost().getHostName();
+        InetAddress addr = InetAddress.getByName(hostName);
+        System.out.println("Server running at " + addr.getHostAddress() + " port " + port);
         marketPlaceServer.run();
     }
 

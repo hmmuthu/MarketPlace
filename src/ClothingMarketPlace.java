@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -304,8 +305,7 @@ public class ClothingMarketPlace {
     public static Response sendRequest(Request request) {
         try {
             Gson gson = new GsonBuilder().create();
-            InetAddress host = InetAddress.getLocalHost();
-            Socket socket = new Socket(host.getHostName(), MarketPlaceServer.port);
+            Socket socket = new Socket(getServerHost(false), MarketPlaceServer.port);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectOutputStream.writeObject(gson.toJson(request));
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
@@ -314,6 +314,17 @@ public class ClothingMarketPlace {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static String getServerHost(boolean local) throws UnknownHostException {
+        if (local) {
+            InetAddress host = InetAddress.getLocalHost();
+            return host.getHostName();
+        } else {
+            String hostName = InetAddress.getLocalHost().getHostName();
+            InetAddress addr = InetAddress.getByName(hostName);
+            return addr.getHostAddress();
         }
     }
 }
