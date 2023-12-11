@@ -339,6 +339,4 @@ public class MarketPlaceServer {
         store.deleteProduct(itemFromPayload.getProduct().getId());
         success_response(gson, outputStream);
     }
-
-
 }
