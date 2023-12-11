@@ -15,6 +15,8 @@ public class User {
     private String email;
     private String password;
 
+    private boolean customer;
+
     public User(String email, String password) {
         setEmail(email);
         this.password = password;
@@ -35,6 +37,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean isCustomer() { return customer; }
+
+    public void setCustomer(boolean customer) {
+        this.customer = customer;
+    }
+
 
     @Override
     public boolean equals(Object o) {

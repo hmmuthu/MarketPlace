@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -77,6 +80,19 @@ public class CartForm extends JDialog {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        if (marketPlace.isClient()) {
+            Request request = new Request(Operation.CHECKOUT, customer.getEmail(), "");
+            Response response = ClothingMarketPlace.sendRequest(request);
+            if (!response.isSuccess()) {
+                JOptionPane.showMessageDialog(cartPanel,
+                        response.getError(),
+                        "Checkout failed",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
         double total = customer.checkOut();
         JOptionPane.showMessageDialog(
                 cartPanel,
@@ -99,10 +115,26 @@ public class CartForm extends JDialog {
             return;
         }
         ShoppingItem selectedItem = customerItemTableModel.getShoppingItems().get(productsTable.getSelectedRow());
+        if (marketPlace.isClient()) {
+            Gson gson = new GsonBuilder().create();
+            Request request = new Request(Operation.REMOVE_FROM_CART, customer.getEmail(), gson.toJson(selectedItem));
+            Response response = ClothingMarketPlace.sendRequest(request);
+            if (!response.isSuccess()) {
+                this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+                JOptionPane.showMessageDialog(cartPanel,
+                        response.getError(),
+                        "Remove product failed",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
         customerItemTableModel.removeElement(selectedItem);
         customer.removeFromCart(selectedItem, marketPlace.getShoppingItems());
         totalLabel.setText('$' + String.format("%.2f", customer.getTotal()));
         customerItemTableModel.fireTableDataChanged();
+        if (marketPlace.isClient()) {
+            this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+        }
     }
 
     private void setupLayout() {

@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -105,6 +108,16 @@ public class SellerForm extends JDialog {
         if (ok == JOptionPane.OK_OPTION) {
             seller.setPassword(new String(pf.getPassword()));
         }
+        if (this.marketPlace.isClient()) {
+            changePasswordActionFromServer();
+        }
+    }
+
+    private void changePasswordActionFromServer() {
+        Gson gson = new GsonBuilder().create();
+        Request request = new Request(Operation.CHANGE_PASSWORD, seller.getEmail(), gson.toJson(seller));
+        ClothingMarketPlace.sendRequest(request);
+        this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
     }
 
     private void importAction() {
@@ -119,6 +132,20 @@ public class SellerForm extends JDialog {
                     "Import failed",
                     JOptionPane.ERROR_MESSAGE);
         } else {
+            if (marketPlace.isClient()) {
+                Gson gson = new GsonBuilder().create();
+                Request request = new Request(Operation.IMPORT_PRODUCT, seller.getEmail(), gson.toJson(seller));
+                Response response = ClothingMarketPlace.sendRequest(request);
+                if (!response.isSuccess()) {
+                    this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+                    JOptionPane.showMessageDialog(sellerPanel,
+                            response.getError(),
+                            "import failed",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+            }
             JOptionPane.showMessageDialog(sellerPanel,
                     "Products successfully imported",
                     "Import success",
@@ -159,7 +186,24 @@ public class SellerForm extends JDialog {
         } else {
             store.setId(marketPlace.getStoreCount());
             marketPlace.tickStoreCount();
+
+            if (this.marketPlace.isClient()) {
+                Gson gson = new GsonBuilder().create();
+                Request request = new Request(Operation.NEW_STORE, store.getSellerEmail(), gson.toJson(store));
+                Response response = ClothingMarketPlace.sendRequest(request);
+                if (!response.isSuccess()) {
+                    this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+                    JOptionPane.showMessageDialog(sellerPanel,
+                            response.getError(),
+                            "Add store failed",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
             storeTableModel.addElement(store);
+            if (this.marketPlace.isClient()) {
+                this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+            }
         }
     }
 

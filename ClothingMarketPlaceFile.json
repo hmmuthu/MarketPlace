@@ -7,14 +7,14 @@
             {
               "name": "Butter",
               "description": "1lb Butter",
-              "quantity": 10,
+              "quantity": 7,
               "price": 2.59,
               "id": 1
             },
             {
               "name": "Cheese",
               "description": "Laughing cow cheese 8oz block",
-              "quantity": 20,
+              "quantity": 4,
               "price": 1.74,
               "id": 2
             },
@@ -98,7 +98,7 @@
             {
               "name": "Apples",
               "description": "Gala 3lb bag organic apples new crop",
-              "quantity": 71,
+              "quantity": 67,
               "price": 2.99,
               "id": 14
             },
@@ -168,7 +168,7 @@
             {
               "name": "Milk",
               "description": "Great Value whole Vitamin D Milk - one gallon",
-              "quantity": 25,
+              "quantity": 21,
               "price": 3.57,
               "id": 23
             },
@@ -238,7 +238,7 @@
             {
               "name": "Drinking water",
               "description": "Great value Purified Drinking water 16.9oz bottles 40 count",
-              "quantity": 76,
+              "quantity": 72,
               "price": 5.63,
               "id": 33
             },
@@ -284,17 +284,107 @@
         }
       ],
       "email": "s",
-      "password": "s"
+      "password": "s",
+      "customer": false
     }
   ],
   "customerList": [
     {
-      "cart": [],
-      "orders": [],
+      "cart": [
+        {
+          "product": {
+            "name": "Cheese",
+            "description": "Laughing cow cheese 8oz block",
+            "quantity": 6,
+            "price": 1.74,
+            "id": 2
+          },
+          "sellerName": "s",
+          "storeName": "Sam\u0027s club"
+        },
+        {
+          "product": {
+            "name": "Cheese",
+            "description": "Laughing cow cheese 8oz block",
+            "quantity": 5,
+            "price": 1.74,
+            "id": 2
+          },
+          "sellerName": "s",
+          "storeName": "Sam\u0027s club"
+        }
+      ],
+      "orders": [
+        {
+          "product": {
+            "name": "Drinking water",
+            "description": "Great value Purified Drinking water 16.9oz bottles 40 count",
+            "quantity": 4,
+            "price": 5.63,
+            "id": 33
+          },
+          "sellerName": "s",
+          "storeName": "Walmart"
+        },
+        {
+          "product": {
+            "name": "Apples",
+            "description": "Gala 3lb bag organic apples new crop",
+            "quantity": 4,
+            "price": 2.99,
+            "id": 14
+          },
+          "sellerName": "s",
+          "storeName": "Sam\u0027s club"
+        },
+        {
+          "product": {
+            "name": "Milk",
+            "description": "Great Value whole Vitamin D Milk - one gallon",
+            "quantity": 4,
+            "price": 3.57,
+            "id": 23
+          },
+          "sellerName": "s",
+          "storeName": "Walmart"
+        },
+        {
+          "product": {
+            "name": "Butter",
+            "description": "1lb Butter",
+            "quantity": 3,
+            "price": 2.59,
+            "id": 1
+          },
+          "sellerName": "s",
+          "storeName": "Sam\u0027s club"
+        }
+      ],
       "email": "c",
-      "password": "c"
+      "password": "c",
+      "customer": false
+    },
+    {
+      "cart": [
+        {
+          "product": {
+            "name": "Cheese",
+            "description": "Laughing cow cheese 8oz block",
+            "quantity": 5,
+            "price": 1.74,
+            "id": 2
+          },
+          "sellerName": "s",
+          "storeName": "Sam\u0027s club"
+        }
+      ],
+      "orders": [],
+      "email": "c1",
+      "password": "c1",
+      "customer": true
     }
   ],
   "productCount": 39,
-  "storeCount": 3
+  "storeCount": 3,
+  "client": false
 }

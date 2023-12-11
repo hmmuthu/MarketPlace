@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -46,6 +49,10 @@ public class SignupForm extends JDialog {
     }
 
     private void signUpAction() {
+        if (marketPlace.isClient()) {
+            signUpActionFromServer();
+            return;
+        }
         ArrayList<User> allUsers = new ArrayList<>();
         allUsers.addAll(this.marketPlace.getCustomerList());
         allUsers.addAll(this.marketPlace.getSellerList());
@@ -64,6 +71,27 @@ public class SignupForm extends JDialog {
         }
     }
 
+    private void signUpActionFromServer() {
+        User user = new User(this.userEmail.getText(), String.valueOf(this.password.getPassword()));
+        user.setCustomer(this.userRole.getSelectedIndex() == 0);
+        Gson gson = new GsonBuilder().create();
+        Request request = new Request(Operation.SIGNUP, this.userEmail.getText(), gson.toJson(user));
+        Response response = ClothingMarketPlace.sendRequest(request);
+        if (response.isSuccess()) {
+            this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+            ArrayList<User> allUsers = new ArrayList<>();
+            allUsers.addAll(getMarketPlace().getCustomerList());
+            allUsers.addAll(getMarketPlace().getSellerList());
+            this.loginUser = User.logInWithInputs(this.userEmail.getText(), String.valueOf(this.password.getPassword()), allUsers);
+            dispose();
+        } else {
+            this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+            JOptionPane.showMessageDialog(signupPanel,
+                    response.getError(),
+                    "Try again",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
     private void setupLayout() {
         Font headerFont = new Font("Juice ITC", Font.BOLD, 36);
         Font defaultFont = new Font("Arial Rounded MT Bold", Font.BOLD, 16);

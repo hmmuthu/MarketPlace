@@ -2,9 +2,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import javax.swing.*;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,6 +17,8 @@ public class ClothingMarketPlace {
     private ArrayList<Customer> customerList = new ArrayList<>();
     private int productCount;
     private int storeCount;
+
+    private boolean client;
 
     // constructor
     public ClothingMarketPlace() {
@@ -47,6 +49,14 @@ public class ClothingMarketPlace {
 
     public void setStoreCount(int storeCount) {
         this.storeCount = storeCount;
+    }
+
+    public void setClient(boolean client) {
+        this.client = client;
+    }
+
+    public boolean isClient() {
+        return client;
     }
 
     public void tickProductCount() {
@@ -138,7 +148,20 @@ public class ClothingMarketPlace {
         return mp;
     }
 
+    public static ClothingMarketPlace loadMarketPlaceFromServer() {
+        Request request = new Request(Operation.LOAD_MARKET_PLACE);
+        Response response = sendRequest(request);
+        Gson gson = new GsonBuilder().create();
+        ClothingMarketPlace mp = gson.fromJson(response.getPayload(), ClothingMarketPlace.class);
+        mp.setClient(true);
+        return mp;
+    }
+
     public void saveMarketPlace() {
+        if (isClient()) {
+            return;
+        }
+
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try {
             FileWriter writer = new FileWriter(CLOTHING_MARKET_PLACE_FILE);
@@ -201,13 +224,21 @@ public class ClothingMarketPlace {
     public static void main(String[] args) {
         if (args.length > 0 && args[0].equals("--cli")) {
             fireCommandLine();
+        } else if (args.length > 0 && args[0].equals("--no_client")) {
+            fireGui(false);
         } else {
-            fireGui();
+            fireGui(true);
         }
     }
 
-    public static void fireGui() {
-        ClothingMarketPlace mp = loadMarketPlace();
+    public static void fireGui(boolean client) {
+        ClothingMarketPlace mp;
+
+        if (!client) {
+            mp = loadMarketPlace();
+        } else {
+            mp = loadMarketPlaceFromServer();
+        }
 
         while (true) {
             LoginForm loginForm = new LoginForm(null, mp);
@@ -268,5 +299,21 @@ public class ClothingMarketPlace {
         dialog.setLocationRelativeTo(null);
         dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dialog.setContentPane(panel);
+    }
+
+    public static Response sendRequest(Request request) {
+        try {
+            Gson gson = new GsonBuilder().create();
+            InetAddress host = InetAddress.getLocalHost();
+            Socket socket = new Socket(host.getHostName(), MarketPlaceServer.port);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectOutputStream.writeObject(gson.toJson(request));
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+            String message = (String) objectInputStream.readObject();
+            return gson.fromJson(message, Response.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -144,6 +147,16 @@ public class CustomerForm extends JDialog {
         if (ok == JOptionPane.OK_OPTION) {
             customer.setPassword(new String(pf.getPassword()));
         }
+        if (marketPlace.isClient()) {
+            changePasswordActionFromServer();
+        }
+    }
+
+    private void changePasswordActionFromServer() {
+        Gson gson = new GsonBuilder().create();
+        Request request = new Request(Operation.CHANGE_PASSWORD, customer.getEmail(), gson.toJson(customer));
+        ClothingMarketPlace.sendRequest(request);
+        this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
     }
 
     private void searchAction() {
@@ -159,6 +172,9 @@ public class CustomerForm extends JDialog {
         int option = JOptionPane.showConfirmDialog(null, message, "Search product", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
             ArrayList<ShoppingItem> searchedItems = null;
+            if (marketPlace.isClient()) {
+                this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+            }
             ArrayList<ShoppingItem> items = marketPlace.getShoppingItems();
             switch (searchType.getSelectedIndex()) {
                 case 0 -> searchedItems = customer.filterByName(searchField.getText(), items);
@@ -239,6 +255,20 @@ public class CustomerForm extends JDialog {
                     selectedItem.getProduct().getPrice(),
                     selectedItem.getProduct().getId());
             ShoppingItem cartItem = new ShoppingItem(cartProduct, selectedItem.getSellerName(), selectedItem.getStoreName());
+            if (marketPlace.isClient()) {
+                Gson gson = new GsonBuilder().create();
+                Request request = new Request(Operation.ADD_TO_CART, customer.getEmail(), gson.toJson(cartItem));
+                Response response = ClothingMarketPlace.sendRequest(request);
+                if (!response.isSuccess()) {
+                    this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+                    JOptionPane.showMessageDialog(customerPanel,
+                            response.getError(),
+                            "Buy product failed",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+            }
             selectedItem.getProduct().removeQuantity(buyQuantity);
             customer.getCart().add(cartItem);
             JOptionPane.showMessageDialog(customerPanel,
@@ -246,6 +276,9 @@ public class CustomerForm extends JDialog {
                     "Buy product",
                     JOptionPane.INFORMATION_MESSAGE);
             customerItemTableModel.fireTableDataChanged();
+            if (marketPlace.isClient()) {
+                this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -261,6 +294,9 @@ public class CustomerForm extends JDialog {
 
     private void listAction() {
         this.customerItemTableModel = new CustomerItemTableModel();
+        if (marketPlace.isClient()) {
+            this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+        }
         for (ShoppingItem shoppingItem : marketPlace.getShoppingItems()) {
             customerItemTableModel.addElement(shoppingItem);
         }

@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -155,9 +158,27 @@ public class SellerProductForm extends JDialog {
                 return;
             }
             product.setId(marketPlace.getProductCount());
-            marketPlace.tickStoreCount();
-            sellerItemTableModel.addElement(new ShoppingItem(product, store.getSellerEmail(), store.getName()));
+            marketPlace.tickProductCount();
+
+            ShoppingItem shoppingItem = new ShoppingItem(product, store.getSellerEmail(), store.getName());
+            if (this.marketPlace.isClient()) {
+                Gson gson = new GsonBuilder().create();
+                Request request = new Request(Operation.NEW_PRODUCT, store.getSellerEmail(), gson.toJson(shoppingItem));
+                Response response = ClothingMarketPlace.sendRequest(request);
+                if (!response.isSuccess()) {
+                    this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+                    JOptionPane.showMessageDialog(productsTable,
+                            response.getError(),
+                            "Add product failed",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            sellerItemTableModel.addElement(shoppingItem);
             sellerItemTableModel.fireTableDataChanged();
+            if (this.marketPlace.isClient()) {
+                this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+            }
         }
     }
 
@@ -187,12 +208,24 @@ public class SellerProductForm extends JDialog {
             String description = descriptionField.getText();
             String quantity = quantityField.getText();
             String price = priceField.getText();
-            Product product;
             try {
                 shoppingItem.getProduct().setName(name);
                 shoppingItem.getProduct().setDescription(description);
                 shoppingItem.getProduct().setQuantity(Integer.parseInt(quantity));
                 shoppingItem.getProduct().setPrice(Double.parseDouble(price));
+                if (this.marketPlace.isClient()) {
+                    Gson gson = new GsonBuilder().create();
+                    Request request = new Request(Operation.MODIFY_PRODUCT, store.getSellerEmail(), gson.toJson(shoppingItem));
+                    Response response = ClothingMarketPlace.sendRequest(request);
+                    if (!response.isSuccess()) {
+                        this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+                        JOptionPane.showMessageDialog(productsTable,
+                                response.getError(),
+                                "Modify product failed",
+                                JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(sellerProductPanel,
                         "One of the value is invalid. Please try again",
@@ -201,6 +234,9 @@ public class SellerProductForm extends JDialog {
                 return;
             }
             sellerItemTableModel.fireTableDataChanged();
+            if (this.marketPlace.isClient()) {
+                this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+            }
         }
     }
 
@@ -213,9 +249,25 @@ public class SellerProductForm extends JDialog {
             return;
         }
         ShoppingItem shoppingItem = sellerItemTableModel.getShoppingItems().get(productsTable.getSelectedRow());
+        if (this.marketPlace.isClient()) {
+            Gson gson = new GsonBuilder().create();
+            Request request = new Request(Operation.DELETE_PRODUCT, store.getSellerEmail(), gson.toJson(shoppingItem));
+            Response response = ClothingMarketPlace.sendRequest(request);
+            if (!response.isSuccess()) {
+                this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+                JOptionPane.showMessageDialog(productsTable,
+                        response.getError(),
+                        "Delete product failed",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
         sellerItemTableModel.removeElement(shoppingItem);
         store.deleteProduct(shoppingItem.getProduct().getId());
         sellerItemTableModel.fireTableDataChanged();
+        if (this.marketPlace.isClient()) {
+            this.marketPlace = ClothingMarketPlace.loadMarketPlaceFromServer();
+        }
     }
 
     private void setupLayout() {
